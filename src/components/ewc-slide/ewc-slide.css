@@ -1,0 +1,21 @@
+:host {
+  /**
+ * @prop --align-content: Align slide content - flex-start / flex-end / center
+ * @prop --align-text: Align slide content - left / right / center
+ */
+  --align-content: center;
+  --align-text: center;
+
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  justify-content: var(--align-content);
+  text-align: var(--align-text);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  /* prevent accidentally selecting / highlighting content inside the slide  */
+  user-select: none;
+  pointer-events: none;
+}

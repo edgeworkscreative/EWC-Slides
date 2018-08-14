@@ -1,0 +1,36 @@
+{
+  "extends": "tslint-ionic-rules",
+  "rules": {
+    "ban-comma-operator": false,
+    "no-empty": [
+      true,
+      "allow-empty-catch"
+    ],
+    "no-floating-promises": true,
+    "no-import-side-effect": false,
+    "no-var-keyword": false,
+    "no-var-requires": false,
+    "prefer-conditional-expression": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "lowercase-last",
+        "named-imports-order": "lowercase-last"
+      }
+    ],
+    "object-literal-sort-keys": false,
+    "indent": {
+      "options": [
+        "spaces",
+        2
+      ]
+    },
+    "no-trailing-whitespace": [
+      true,
+      "ignore-comments",
+      "ignore-jsdoc",
+      "ignore-template-strings",
+      "ignore-blank-lines"
+    ]
+  }
+}

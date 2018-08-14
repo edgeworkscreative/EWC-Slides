@@ -1,0 +1,31 @@
+:host {
+  /**
+  * @prop --slide-transition: Active slide transition
+  */
+  --slide-transition: transform 0.4s ease-out;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+::slotted(.animate) {
+  transition: var(--slide-transition);
+}
+
+.animate {
+  transition: var(--slide-transition);
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
