@@ -104,6 +104,10 @@ export class EwcSlides {
     }
   }
   
+  private getSwipeDirection(): 'RIGHT' | 'LEFT' {
+    return (this.touchStartX - this.touchMoveX) < 0 ? 'RIGHT' : 'LEFT';
+  }
+  
   private clickContainsNoSwipingTags(event: any) {
     return event.path.some((node: HTMLElement) => {
       if (node.tagName) {
@@ -208,7 +212,7 @@ export class EwcSlides {
   @Watch('moveX')
   translateMovingSlider() {
     let absMove = Math.abs((this.moveX - (this.index * this.el.offsetWidth)));
-    if (this.mouseIsDown && this.index != this.totalSlides && (absMove > this.dragThreshold)) {
+    if (this.mouseIsDown && (absMove > this.dragThreshold)) {
       this.sliderDrag.emit(-this.moveX);
       this.innerEl.style.transform = `translate3d(-${this.moveX}px,0,0)`;
     }
@@ -247,12 +251,11 @@ export class EwcSlides {
       this.mouseIsDown = false;
       let endX         = (event instanceof MouseEvent) ? event.pageX : event.changedTouches[0].pageX;
       let absMove      = Math.abs((this.touchStartX - endX));
-      let swipedRight  = ((this.touchStartX - endX) < 0);
-      if (!swipedRight && (this.index < this.totalSlides) && absMove > this.threshold) {
+      if (this.getSwipeDirection() === 'LEFT' && (this.index < this.totalSlides) && absMove > this.threshold) {
         this.index++;
-      } else if (swipedRight && (this.index > 0) && absMove > this.threshold) {
+      } else if (this.getSwipeDirection() === 'RIGHT' && (this.index > 0) && absMove > this.threshold) {
         this.index--;
-      } else if (endX >= this.dragThreshold) {
+      } else if (endX >= this.dragThreshold || this.index === this.totalSlides || this.index === 0) {
         // drag distance wasn't far enough to trigger a slide change. Move slide back to original position.
         this.updateSlidePosition(true);
       }
