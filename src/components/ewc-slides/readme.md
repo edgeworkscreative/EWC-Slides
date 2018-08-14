@@ -5,6 +5,16 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property        | Attribute        | Description                                                                                                                                                                                                                     | Type       |
+| --------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `dragThreshold` | `drag-threshold` | Value in px. Defaults to `30`. If "touch distance" is lower than this value then slide will not start moving. See `threshold` for more information.                                                                             | `number`   |
+| `noSwipingTags` | --               | Specify elements to disable swiping on. Defaults to `['input', 'textarea', 'img']`.                                                                                                                                             | `string[]` |
+| `noSwiping`     | `no-swiping`     | Enable/disable swiping on elements. Defaults to `true`.                                                                                                                                                                         | `boolean`  |
+| `threshold`     | `threshold`      | Value in px. Defaults to `80`. If "touch distance" is greater than this value then active slide will change upon release. If "touch distance" is NOT greater than this value then the active slide will snap back upon release. | `number`   |
+
+
 ## Events
 
 | Event                  | Description                                      |

@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Listen, Method, State, Watch } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Listen, Method, Prop, State, Watch } from '@stencil/core';
 import { addClass, removeClass } from '../../utils';
 
 @Component({
@@ -17,6 +17,30 @@ export class EwcSlides {
   @State() innerEl: HTMLElement;
   @State() isLocked: boolean;
   @State() mouseIsDown: boolean;
+  
+  /**
+   * Value in px. Defaults to `30`.
+   * If "touch distance" is lower than this value then slide will not start moving.
+   * See `threshold` for more information.
+   */
+  @Prop() dragThreshold: number = 30;
+  
+  /**
+   * Value in px. Defaults to `80`.
+   * If "touch distance" is greater than this value then active slide will change upon release.
+   * If "touch distance" is NOT greater than this value then the active slide will snap back upon release.
+   */
+  @Prop() threshold: number = 80;
+  
+  /**
+   * Enable/disable swiping on elements. Defaults to `true`.
+   */
+  @Prop() noSwiping: boolean = true;
+  
+  /**
+   * Specify elements to disable swiping on. Defaults to `['input', 'textarea', 'img']`.
+   */
+  @Prop() noSwipingTags: string[] = ['input', 'textarea', 'img'];
   
   /**
    * Emitted when the slider is actively being moved.
@@ -76,8 +100,16 @@ export class EwcSlides {
         this.sliderIndexChange.emit(this.index);
         this.addAnimations();
       } else this.removeAnimations();
-      this.innerEl.setAttribute('style', 'transform: translate3d(-' + (this.index * this.el.offsetWidth) + 'px,0,0)');
+      this.innerEl.style.transform = `translate3d(-${(this.index * this.el.offsetWidth)}px,0,0)`;
     }
+  }
+  
+  private clickContainsNoSwipingTags(event: any) {
+    return event.path.some((node: HTMLElement) => {
+      if (node.tagName) {
+        return (this.noSwipingTags.indexOf(node.tagName.toLowerCase()) != -1);
+      }
+    });
   }
   
   /**
@@ -175,9 +207,10 @@ export class EwcSlides {
   
   @Watch('moveX')
   translateMovingSlider() {
-    if (this.mouseIsDown && this.index != this.totalSlides) {
+    let absMove = Math.abs((this.moveX - (this.index * this.el.offsetWidth)));
+    if (this.mouseIsDown && this.index != this.totalSlides && (absMove > this.dragThreshold)) {
       this.sliderDrag.emit(-this.moveX);
-      this.innerEl.setAttribute('style', 'transform: translate3d(-' + this.moveX + 'px,0,0)');
+      this.innerEl.style.transform = `translate3d(-${this.moveX}px,0,0)`;
     }
   }
   
@@ -190,7 +223,7 @@ export class EwcSlides {
   @Listen('touchstart')
   touchStart(event: MouseEvent | TouchEvent) {
     this.sliderTouchStart.emit();
-    if (!this.isLocked) {
+    if (!this.isLocked && !this.clickContainsNoSwipingTags(event)) {
       this.mouseIsDown = true;
       this.touchStartX = (event instanceof MouseEvent) ? event.pageX : event.touches[0].pageX;
       this.removeAnimations();
@@ -200,7 +233,7 @@ export class EwcSlides {
   @Listen('mousemove')
   @Listen('touchmove')
   touchMove(event: MouseEvent | TouchEvent) {
-    if (!this.isLocked) {
+    if (!this.isLocked && this.mouseIsDown) {
       this.touchMoveX = (event instanceof MouseEvent) ? event.pageX : event.touches[0].pageX;
       this.moveX      = ((this.index * this.el.offsetWidth) + (this.touchStartX - this.touchMoveX));
     }
@@ -208,14 +241,20 @@ export class EwcSlides {
   
   @Listen('mouseup')
   @Listen('touchend')
-  touchEnd() {
+  touchEnd(event: MouseEvent | TouchEvent) {
     this.sliderTouchEnd.emit();
-    if (!this.isLocked) {
+    if (!this.isLocked && this.mouseIsDown) {
       this.mouseIsDown = false;
-      if ((this.moveX > (this.index * this.el.offsetWidth)) && (this.index < this.totalSlides)) {
+      let endX         = (event instanceof MouseEvent) ? event.pageX : event.changedTouches[0].pageX;
+      let absMove      = Math.abs((this.touchStartX - endX));
+      let swipedRight  = ((this.touchStartX - endX) < 0);
+      if (!swipedRight && (this.index < this.totalSlides) && absMove > this.threshold) {
         this.index++;
-      } else if ((this.moveX < (this.index * this.el.offsetWidth)) && (this.index > 0)) {
+      } else if (swipedRight && (this.index > 0) && absMove > this.threshold) {
         this.index--;
+      } else if (endX >= this.dragThreshold) {
+        // drag distance wasn't far enough to trigger a slide change. Move slide back to original position.
+        this.updateSlidePosition(true);
       }
     }
   }

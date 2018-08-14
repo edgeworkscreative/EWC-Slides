@@ -30,6 +30,10 @@ declare global {
 
     interface EwcSlides {
       /**
+       * Value in px. Defaults to `30`. If "touch distance" is lower than this value then slide will not start moving. See `threshold` for more information.
+       */
+      'dragThreshold': number;
+      /**
        * Get the index of the active slide.
        */
       'getActiveIndex': () => number;
@@ -66,6 +70,14 @@ declare global {
        */
       'nextSlide': () => void;
       /**
+       * Enable/disable swiping on elements. Defaults to `true`.
+       */
+      'noSwiping': boolean;
+      /**
+       * Specify elements to disable swiping on. Defaults to `['input', 'textarea', 'img']`.
+       */
+      'noSwipingTags': string[];
+      /**
        * Transition to the previous slide.
        */
       'previousSlide': () => void;
@@ -73,6 +85,10 @@ declare global {
        * Transition to the specified slide.
        */
       'slideTo': (index: number) => void;
+      /**
+       * Value in px. Defaults to `80`. If "touch distance" is greater than this value then active slide will change upon release. If "touch distance" is NOT greater than this value then the active slide will snap back upon release.
+       */
+      'threshold': number;
     }
   }
 
@@ -109,6 +125,18 @@ declare global {
 
     export interface EwcSlidesAttributes extends HTMLAttributes {
       /**
+       * Value in px. Defaults to `30`. If "touch distance" is lower than this value then slide will not start moving. See `threshold` for more information.
+       */
+      'dragThreshold'?: number;
+      /**
+       * Enable/disable swiping on elements. Defaults to `true`.
+       */
+      'noSwiping'?: boolean;
+      /**
+       * Specify elements to disable swiping on. Defaults to `['input', 'textarea', 'img']`.
+       */
+      'noSwipingTags'?: string[];
+      /**
        * Emitted when the slider is actively being moved.
        */
       'onSliderDrag'?: (event: CustomEvent) => void;
@@ -132,6 +160,10 @@ declare global {
        * Emitted when the user first touches the slider.
        */
       'onSliderTouchStart'?: (event: CustomEvent) => void;
+      /**
+       * Value in px. Defaults to `80`. If "touch distance" is greater than this value then active slide will change upon release. If "touch distance" is NOT greater than this value then the active slide will snap back upon release.
+       */
+      'threshold'?: number;
     }
   }
 

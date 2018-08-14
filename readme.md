@@ -28,11 +28,13 @@ A lightweight slider component built with StencilJS.
 </ewc-slides>
 ```
 
+## Documentation
+- [ewc-slides](https://github.com/edgeworkscreative/EWC-Slides/blob/master/src/components/ewc-slides/readme.md)
+- [ewc-slide](https://github.com/edgeworkscreative/EWC-Slides/blob/master/src/components/ewc-slide/readme.md)
+
 ## Using this component
 
 ### Script tag
-
-- [Publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 - Put a script tag similar to this `<script src='https://unpkg.com/@edgeworkscreative/ewc-slides@latest/dist/ewc.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 

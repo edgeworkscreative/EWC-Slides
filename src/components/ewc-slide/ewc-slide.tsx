@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core';
+import { Component, Element } from '@stencil/core';
 
 @Component({
   tag:      'ewc-slide',
@@ -6,11 +6,19 @@ import { Component } from '@stencil/core';
   shadow:   true
 })
 export class EwcSlide {
+  @Element() el!: HTMLElement;
+  
+  componentDidLoad() {
+    const imgs = this.el.querySelectorAll('img');
+    (Array.from(imgs) as HTMLImageElement[]).map((img) => {
+      img.style.pointerEvents = 'none';
+    })
+  }
   
   render() {
     return (
       <div class="slide-wrapper">
-        <slot />
+        <slot/>
       </div>
     );
   }
