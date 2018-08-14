@@ -33,17 +33,17 @@ A lightweight slider component built with StencilJS.
 ### Script tag
 
 - [Publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-- Put a script tag similar to this `<script src='https://unpkg.com/ewc-slides@0.0.1/dist/ewc.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/@edgeworkscreative/ewc-slides@latest/dist/ewc.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
-- Run `npm install ewc-slides --save`
-- Put a script tag similar to this `<script src='node_modules/ewc-slides/dist/ewc.js'></script>` in the head of your index.html
+- Run `npm install @edgeworkscreative/ewc-slides --save`
+- Put a script tag similar to this `<script src='node_modules/@edgeworkscreative/ewc-slides/dist/ewc.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### In a stencil-starter app
-- Run `npm install ewc-slides --save`
-- Add an import to the npm packages `import 'ewc-slides';`
+- Run `npm install @edgeworkscreative/ewc-slides --save`
+- Add an import to the npm packages `import '@edgeworkscreative/ewc-slides';`
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ## Stencil
