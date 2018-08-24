@@ -1,6 +1,6 @@
 {
   "name": "@edgeworkscreative/ewc-slides",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Lightweight slider component built with StencilJS",
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
