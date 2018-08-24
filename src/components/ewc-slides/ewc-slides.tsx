@@ -214,6 +214,7 @@ export class EwcSlides {
     let absMove = Math.abs((this.moveX - (this.index * this.el.offsetWidth)));
     if (this.mouseIsDown && (absMove > this.dragThreshold)) {
       this.sliderDrag.emit(-this.moveX);
+      // TODO track startY - prevent scrolling Y when swiping
       this.innerEl.style.transform = `translate3d(-${this.moveX}px,0,0)`;
     }
   }
@@ -255,9 +256,9 @@ export class EwcSlides {
         this.index++;
       } else if (this.getSwipeDirection() === 'RIGHT' && (this.index > 0) && absMove > this.threshold) {
         this.index--;
-      } else if (endX >= this.dragThreshold || this.index === this.totalSlides || this.index === 0) {
+      } else if (absMove >= this.dragThreshold) {
         // drag distance wasn't far enough to trigger a slide change. Move slide back to original position.
-        this.updateSlidePosition(true);
+        this.updateSlidePosition(false);
       }
     }
   }
