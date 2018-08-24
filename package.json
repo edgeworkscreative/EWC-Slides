@@ -16,9 +16,8 @@
     "test.watch": "jest --watch"
   },
   "devDependencies": {
-    "@stencil/core": "latest",
+    "@stencil/core": "^0.12.0-8",
     "@types/jest": "^23.3.1",
-    "@types/swipe": "^2.0.27",
     "jest": "^23.4.2",
     "tslint": "^5.11.0",
     "tslint-ionic-rules": "0.0.17"
