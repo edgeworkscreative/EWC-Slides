@@ -1,3 +1,10 @@
+## <small>0.0.7 (2018-08-30)</small>
+
+* fix(slider-container): change css overflow to  overflow-x hidden ([646c2c6](https://github.com/edgeworkscreative/EWC-Slides/commit/646c2c6))
+* update Stencil ([6675b28](https://github.com/edgeworkscreative/EWC-Slides/commit/6675b28))
+
+
+
 ## <small>0.0.6 (2018-08-24)</small>
 
 * Add new props and fix some calculations ([3305ded](https://github.com/edgeworkscreative/EWC-Slides/commit/3305ded))
