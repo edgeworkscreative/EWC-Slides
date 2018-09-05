@@ -13,14 +13,16 @@
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "jest",
-    "test.watch": "jest --watch"
+    "test.watch": "jest --watch",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s"
   },
   "devDependencies": {
     "@stencil/core": "^0.12.0-8",
     "@types/jest": "^23.3.1",
     "jest": "^23.4.2",
     "tslint": "^5.11.0",
-    "tslint-ionic-rules": "0.0.17"
+    "tslint-ionic-rules": "0.0.17",
+    "conventional-changelog-cli": "^2.0.5"
   },
   "repository": {
     "type": "git",

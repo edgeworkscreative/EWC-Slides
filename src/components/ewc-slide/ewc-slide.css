@@ -2,6 +2,7 @@
   /**
  * @prop --align-content: Align slide content - flex-start / flex-end / center
  * @prop --align-text: Align slide content - left / right / center
+ * @prop --max-height: The maximum height of the slide
  */
   --align-content: center;
   --align-text: center;
