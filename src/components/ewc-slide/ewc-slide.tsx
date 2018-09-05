@@ -17,7 +17,7 @@ export class EwcSlide {
   
   render() {
     return (
-      <div class="slide-wrapper">
+      <div class=" slide-wrapper">
         <slot/>
       </div>
     );

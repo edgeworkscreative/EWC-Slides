@@ -267,7 +267,7 @@ export class EwcSlides {
     return [
       <div class="slider-container" id="slider">
         <div class="inner">
-          <slot/>
+            <slot/>
         </div>
       </div>
     ];

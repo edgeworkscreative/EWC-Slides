@@ -5,7 +5,7 @@
  */
   --align-content: center;
   --align-text: center;
-
+  --max-height: 600px;
   display: flex;
   position: relative;
   flex-shrink: 0;
@@ -14,4 +14,9 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+}
+.slide-wrapper {
+  height:var(--max-height);
+  width:100%;
+  overflow-x: scroll;
 }
