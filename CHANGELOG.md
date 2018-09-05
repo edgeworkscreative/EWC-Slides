@@ -1,3 +1,10 @@
+## <small>0.0.8 (2018-09-05)</small>
+
+* Add changelog script ([c62c739](https://github.com/edgeworkscreative/EWC-Slides/commit/c62c739))
+* Dynamic Slide Heights ([7e7ead3](https://github.com/edgeworkscreative/EWC-Slides/commit/7e7ead3))
+
+
+
 ## <small>0.0.7 (2018-08-30)</small>
 
 * fix(slider-container): change css overflow to  overflow-x hidden ([646c2c6](https://github.com/edgeworkscreative/EWC-Slides/commit/646c2c6))
